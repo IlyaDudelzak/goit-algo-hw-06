@@ -28,13 +28,13 @@ class Record:
     def find_phone(self, phone):
          for i in self.phones:
               if(i.value == phone):
-                   return Phone(phone)
+                   return i
 
          return None
 
     def has_phone(self, phone):
          for i in self.phones:
-              if(i.value == i):
+              if(i.value == phone):
                    return True
          return False
 
@@ -44,7 +44,7 @@ class Record:
          self.phones.append(Phone(phone))
 
     def remove_phone(self, phone: str):
-         self.phones.remove(Phone(phone))
+         self.phones.remove(self.find_phone(phone))
 
     def edit_phone(self, phone1, phone2):
          Phone(phone1)
@@ -64,10 +64,7 @@ class AddressBook(UserDict):
             raise ValueError("Record already registried")
 
     def find(self, name):
-         if(name in self.data):
-              return self.data[name]
-         else:
-              return None      
+         return self.data.get(name)    
 
     def delete(self, name):
          if(name in self.data):
